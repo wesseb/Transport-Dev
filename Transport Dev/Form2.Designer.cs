@@ -40,12 +40,13 @@
             this.label5 = new System.Windows.Forms.Label();
             this.dbBox = new System.Windows.Forms.TextBox();
             this.saveButton = new System.Windows.Forms.Button();
+            this.savePasswordCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.portBox)).BeginInit();
             this.SuspendLayout();
             // 
             // testSQLConnect
             // 
-            this.testSQLConnect.Location = new System.Drawing.Point(149, 159);
+            this.testSQLConnect.Location = new System.Drawing.Point(149, 184);
             this.testSQLConnect.Name = "testSQLConnect";
             this.testSQLConnect.Size = new System.Drawing.Size(79, 50);
             this.testSQLConnect.TabIndex = 0;
@@ -131,7 +132,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 133);
+            this.label5.Location = new System.Drawing.Point(12, 158);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(25, 15);
             this.label5.TabIndex = 9;
@@ -139,14 +140,14 @@
             // 
             // dbBox
             // 
-            this.dbBox.Location = new System.Drawing.Point(53, 130);
+            this.dbBox.Location = new System.Drawing.Point(53, 155);
             this.dbBox.Name = "dbBox";
             this.dbBox.Size = new System.Drawing.Size(175, 23);
             this.dbBox.TabIndex = 10;
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(12, 159);
+            this.saveButton.Location = new System.Drawing.Point(12, 184);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(79, 50);
             this.saveButton.TabIndex = 11;
@@ -154,11 +155,22 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
+            // savePasswordCheckBox
+            // 
+            this.savePasswordCheckBox.AutoSize = true;
+            this.savePasswordCheckBox.Location = new System.Drawing.Point(53, 130);
+            this.savePasswordCheckBox.Name = "savePasswordCheckBox";
+            this.savePasswordCheckBox.Size = new System.Drawing.Size(116, 19);
+            this.savePasswordCheckBox.TabIndex = 12;
+            this.savePasswordCheckBox.Text = "Zapamiętaj hasło";
+            this.savePasswordCheckBox.UseVisualStyleBackColor = true;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(250, 221);
+            this.ClientSize = new System.Drawing.Size(250, 242);
+            this.Controls.Add(this.savePasswordCheckBox);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.dbBox);
             this.Controls.Add(this.label5);
@@ -195,5 +207,6 @@
         private Label label5;
         private TextBox dbBox;
         private Button saveButton;
+        private CheckBox savePasswordCheckBox;
     }
 }
