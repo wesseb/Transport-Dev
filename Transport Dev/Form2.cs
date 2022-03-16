@@ -88,18 +88,6 @@ namespace Transport_Dev
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            byte[] key;
-            byte[] iv;
-
-            using (StreamReader sr = new StreamReader(tokenFile))
-            {
-                string? tokenKey = sr.ReadLine();
-                string? tokenIV = sr.ReadLine();
-
-                key = Convert.FromBase64String(tokenKey);
-                iv = Convert.FromBase64String(tokenIV);
-            }
-
             try
             {
                 if (!File.Exists(xmlfile))
@@ -110,7 +98,7 @@ namespace Transport_Dev
                             new XElement("Port", portBox.Text),
                             new XElement("DBname", dbBox.Text),
                             new XElement("User", loginBox.Text),
-                            new XElement("Password", AesEncrypter.EncryptToAesAndOutput(passBox.Text, key, iv))
+                            new XElement("Password", AesEncrypter.EncryptToAesAndOutput(passBox.Text))
                         )
                     );
 

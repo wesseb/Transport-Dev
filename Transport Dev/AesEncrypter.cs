@@ -10,6 +10,9 @@ namespace Transport_Dev
 
         private const string tokenFile = @"key.token";
 
+        /// <summary>
+        /// Funkcja do wygenerowania tokenu IV oraz Key
+        /// </summary>
         public static void GenerateKey()
         {
             using (Aes aes = Aes.Create())
@@ -30,29 +33,48 @@ namespace Transport_Dev
             }
         }
 
-        public static string EncryptToAesAndOutput(string text, byte[] Key, byte[] IV)
+        /// <summary>
+        /// Funkcja szyfrująca hasło
+        /// </summary>
+        /// <param name="text">Hasło w formie plain textu</param>
+        /// <returns>Zaszyfrowane hasło</returns>
+        /// <exception cref="ArgumentNullException">Gdy nie ma podanego hasła</exception>
+        /// <exception cref="ArgumentException">Gdy nie ma pliku z tokenem</exception>
+        public static string EncryptToAesAndOutput(string text)
         {
-            if (text == null || text.Length <= 0)
-                throw new ArgumentNullException(nameof(text));
-            if (Key == null || Key.Length <= 0)
-                throw new ArgumentNullException(nameof(Key));
-            if (IV == null || IV.Length <= 0)
-                throw new ArgumentNullException(nameof(IV));
+            byte[] Key;
+            byte[] IV;
             byte[] encrypted;
             string encryptedText;
 
+            if (text == null || text.Length <= 0)
+                throw new ArgumentNullException(nameof(text));
+            if (!File.Exists(tokenFile))
+                throw new ArgumentException(nameof(tokenFile));
+
+            using (StreamReader sr = new StreamReader(tokenFile))
+            {
+                string? tokenKey = sr.ReadLine();
+                string? tokenIV = sr.ReadLine();
+
+                #pragma warning disable CS8604 //Wartość nigdy nie będzie nullem
+                Key = Convert.FromBase64String(tokenKey);
+                IV = Convert.FromBase64String(tokenIV);
+                #pragma warning restore CS8604
+            }
+
             using (Aes aes = Aes.Create())
             {
-                aes.IV = IV;
                 aes.Key = Key;
+                aes.IV = IV;
 
                 ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
 
                 using MemoryStream ms = new MemoryStream();
                 using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
-                using (StreamWriter ws = new StreamWriter(cs))
+                using (StreamWriter sw = new StreamWriter(cs))
                 {
-                    ws.Write(text);
+                    sw.Write(text);
                 }
                 encrypted = ms.ToArray();
             }
