@@ -35,7 +35,7 @@ namespace Transport_Dev
         /// <summary>
         /// Generowanie hasła AES
         /// </summary>
-        /// <param name="text"></param>
+        /// <param name="text">Hasło</param>
         /// <returns>Zaszyfrowane hasło</returns>
         /// <exception cref="ArgumentNullException">Kiedy nie ma hasła</exception>
         /// <exception cref="ArgumentException">Kiedy jest brak pliku token.dat</exception>
