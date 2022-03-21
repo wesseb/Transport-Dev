@@ -5,9 +5,13 @@ using System.Security.Cryptography;
 
 namespace Transport_Dev
 {
-    public static class AesEncrypter
+    /// <summary>
+    /// STARY SYSTEM
+    /// </summary>
+    /*public static class AesEncrypterOldStream
     {
-        private const string tokenDat = @"token.dat";
+
+        private const string tokenFile = @"key.token";
 
         /// <summary>
         /// Funkcja do wygenerowania tokenu IV oraz Key
@@ -21,24 +25,24 @@ namespace Transport_Dev
                 byte[] key = aes.Key;
                 byte[] IV = aes.IV;
 
-                using (FileStream stream = File.Open(tokenDat, FileMode.Create))
-                using (BinaryWriter bw = new BinaryWriter(stream, Encoding.UTF8, false))
+                string resultkey = Convert.ToBase64String(key);
+                string resultiv = Convert.ToBase64String(IV);
+
+                using (StreamWriter sw = new StreamWriter(tokenFile))
                 {
-                    bw.Write(key.Length);
-                    bw.Write(key, 0, key.Length);
-                    bw.Write(IV.Length);
-                    bw.Write(IV, 0, IV.Length);
+                    sw.WriteLine(resultkey);
+                    sw.WriteLine(resultiv);
                 }
             }
         }
 
         /// <summary>
-        /// Generowanie hasła AES
+        /// Funkcja szyfrująca hasło
         /// </summary>
-        /// <param name="text"></param>
+        /// <param name="text">Hasło w formie plain textu</param>
         /// <returns>Zaszyfrowane hasło</returns>
-        /// <exception cref="ArgumentNullException">Kiedy nie ma hasła</exception>
-        /// <exception cref="ArgumentException">Kiedy jest brak pliku token.dat</exception>
+        /// <exception cref="ArgumentNullException">Gdy nie ma podanego hasła</exception>
+        /// <exception cref="ArgumentException">Gdy nie ma pliku z tokenem</exception>
         public static string EncryptToAesAndOutput(string text)
         {
             byte[] Key;
@@ -48,19 +52,26 @@ namespace Transport_Dev
 
             if (text == null || text.Length <= 0)
                 throw new ArgumentNullException(nameof(text));
-            if (!File.Exists(tokenDat))
-                throw new ArgumentException(nameof(tokenDat));
+            if (!File.Exists(tokenFile))
+                throw new ArgumentException(nameof(tokenFile));
 
-            using (FileStream stream = File.Open(tokenDat, FileMode.Open))
-            using (BinaryReader br = new BinaryReader(stream, Encoding.UTF8, false))
+            using (StreamReader sr = new StreamReader(tokenFile))
             {
-                Key = br.ReadBytes(br.ReadInt32());
-                IV = br.ReadBytes(br.ReadInt32());
+                string? tokenKey = sr.ReadLine();
+                string? tokenIV = sr.ReadLine();
+
+                #pragma warning disable CS8604 //Wartość nigdy nie będzie nullem
+                Key = Convert.FromBase64String(tokenKey);
+                IV = Convert.FromBase64String(tokenIV);
+                #pragma warning restore CS8604
             }
 
             using (Aes aes = Aes.Create())
             {
-                ICryptoTransform encryptor = aes.CreateEncryptor(Key, IV);
+                aes.Key = Key;
+                aes.IV = IV;
+
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
 
                 using MemoryStream ms = new MemoryStream();
                 using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
@@ -68,14 +79,12 @@ namespace Transport_Dev
                 {
                     sw.Write(text);
                 }
-
                 encrypted = ms.ToArray();
-
             }
 
             encryptedText = Convert.ToBase64String(encrypted);
 
             return encryptedText;
         }
-    }
+    }*/
 }

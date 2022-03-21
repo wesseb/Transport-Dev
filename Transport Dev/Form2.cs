@@ -15,13 +15,13 @@ namespace Transport_Dev
     public partial class Form2 : Form
     {
         private readonly string xmlfile = @"config.xml";
-        private const string tokenFile = @"key.token";
+        private const string tokenDat = @"token.dat";
 
         public Form2()
         {
             InitializeComponent();
 
-            if (!File.Exists(tokenFile))
+            if (!File.Exists(tokenDat))
             {
                 AesEncrypter.GenerateKey();
             }
