@@ -15,7 +15,7 @@ namespace Transport_Dev
     public partial class Form2 : Form
     {
         private readonly string xmlfile = @"config.xml";
-        private const string tokenDat = @"token.dat";
+        private readonly string tokenDat = @"token.dat";
 
         public Form2()
         {
@@ -24,6 +24,10 @@ namespace Transport_Dev
             if (!File.Exists(tokenDat))
             {
                 AesEncrypter.GenerateKey();
+            }
+            else if (File.Exists(xmlfile))
+            {
+                //TODO: Załadowanie wartości
             }
         }
 
@@ -88,7 +92,11 @@ namespace Transport_Dev
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            try
+            //TODO: Inny system
+
+
+
+            /* try
             {
                 if (!File.Exists(xmlfile))
                 {
@@ -98,11 +106,17 @@ namespace Transport_Dev
                             new XElement("Port", portBox.Text),
                             new XElement("DBname", dbBox.Text),
                             new XElement("User", loginBox.Text),
-                            new XElement("Password", AesEncrypter.EncryptToAesAndOutput(passBox.Text))
+                            savePasswordCheckBox.Checked ? new XElement("Password", AesEncrypter.EncryptToAesAndOutput(passBox.Text)) : null
                         )
                     );
 
                     xDoc.Save(xmlfile);
+                }
+                else
+                {
+                    XDocument xDoc = XDocument.Load(xmlfile);
+
+
                 }
             }
             catch (Exception ex)
@@ -111,8 +125,9 @@ namespace Transport_Dev
             }
             finally
             {
+                MessageBox.Show("Zmiany zapisane!", "OK!");
                 enableSwitch(true);
-            }
+            } */
         }
     }
 }
