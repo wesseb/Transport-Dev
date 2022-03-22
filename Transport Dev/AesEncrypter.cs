@@ -77,5 +77,19 @@ namespace Transport_Dev
 
             return encryptedText;
         }
+
+        //TODO: DO DOKOŃCZENIA
+        public static string DecryptFromAesAndOutput(string encryptedText)
+        {
+            byte[] Key;
+            byte[] IV;
+            byte[] encryptedBytes;
+            string decryptedText;
+
+            if (encryptedText == null || encryptedText.Length <= 0)
+                throw new ArgumentNullException(nameof(encryptedText));
+
+            return decryptedText;
+        }
     }
 }
