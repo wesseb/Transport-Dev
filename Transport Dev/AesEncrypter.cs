@@ -33,12 +33,12 @@ namespace Transport_Dev
         }
 
         /// <summary>
-        /// Generowanie hasła AES
+        /// Hashowanie hasła w formacie AES
         /// </summary>
         /// <param name="text">Hasło</param>
         /// <returns>Zaszyfrowane hasło</returns>
         /// <exception cref="ArgumentNullException">Kiedy nie ma hasła</exception>
-        /// <exception cref="ArgumentException">Kiedy jest brak pliku token.dat</exception>
+        /// <exception cref="FileNotFoundException">Kiedy jest brak pliku token.dat</exception>
         public static string EncryptToAesAndOutput(string text)
         {
             byte[] Key;
@@ -49,7 +49,7 @@ namespace Transport_Dev
             if (text == null || text.Length <= 0)
                 throw new ArgumentNullException(nameof(text));
             if (!File.Exists(tokenDat))
-                throw new ArgumentException(nameof(tokenDat));
+                throw new FileNotFoundException(nameof(tokenDat));
 
             using (FileStream stream = File.Open(tokenDat, FileMode.Open))
             using (BinaryReader br = new BinaryReader(stream, Encoding.UTF8, false))
@@ -78,16 +78,44 @@ namespace Transport_Dev
             return encryptedText;
         }
 
-        //TODO: DO DOKOŃCZENIA
+        /// <summary>
+        /// Dehashowania hasła w formacie AES
+        /// </summary>
+        /// <param name="encryptedText">Zaszyfrowane hasło</param>
+        /// <returns>Hasło w formie plain textu</returns>
+        /// <exception cref="ArgumentNullException">Kiedy nie ma hasła</exception>
+        /// <exception cref="FileNotFoundException">Kiedy jest brak pliku token.dat</exception>
         public static string DecryptFromAesAndOutput(string encryptedText)
         {
             byte[] Key;
             byte[] IV;
-            byte[] encryptedBytes;
             string decryptedText;
 
             if (encryptedText == null || encryptedText.Length <= 0)
                 throw new ArgumentNullException(nameof(encryptedText));
+            if (!File.Exists(tokenDat))
+                throw new FileNotFoundException(nameof(tokenDat));
+
+            using (FileStream stream = File.Open(tokenDat, FileMode.Open))
+            using (BinaryReader br = new BinaryReader(stream, Encoding.UTF8, false))
+            {
+                Key = br.ReadBytes(br.ReadInt32());
+                IV = br.ReadBytes(br.ReadInt32());
+            }
+
+            byte[] encryptedBytes = Convert.FromBase64String(encryptedText);
+
+            using (Aes aes = Aes.Create())
+            {
+                ICryptoTransform decryptor = aes.CreateDecryptor(Key, IV);
+
+                using MemoryStream ms = new MemoryStream(encryptedBytes);
+                using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
+                using (StreamReader sr = new StreamReader(cs))
+                {
+                    decryptedText = sr.ReadToEnd();
+                }
+            }
 
             return decryptedText;
         }
