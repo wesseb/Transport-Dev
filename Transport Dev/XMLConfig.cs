@@ -50,14 +50,12 @@ namespace Transport_Dev
 
                     xDoc.Save(xmlFileName);
                 }
+
+                MessageBox.Show("Zapisano zmiany!", "OK");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error!");
-            }
-            finally
-            {
-                MessageBox.Show("Zapisano zmiany!", "OK");
             }
         }
     }
