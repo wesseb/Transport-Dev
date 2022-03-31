@@ -14,20 +14,23 @@ namespace Transport_Dev
         /// </summary>
         public static void GenerateKey()
         {
-            using (Aes aes = Aes.Create())
+            if (!File.Exists(tokenDat))
             {
-                aes.KeySize = 256;
-
-                byte[] key = aes.Key;
-                byte[] IV = aes.IV;
-
-                using (FileStream stream = File.Open(tokenDat, FileMode.Create))
-                using (BinaryWriter bw = new BinaryWriter(stream, Encoding.UTF8, false))
+                using (Aes aes = Aes.Create())
                 {
-                    bw.Write(key.Length);
-                    bw.Write(key, 0, key.Length);
-                    bw.Write(IV.Length);
-                    bw.Write(IV, 0, IV.Length);
+                    aes.KeySize = 256;
+
+                    byte[] key = aes.Key;
+                    byte[] IV = aes.IV;
+
+                    using (FileStream stream = File.Open(tokenDat, FileMode.Create))
+                    using (BinaryWriter bw = new BinaryWriter(stream, Encoding.UTF8, false))
+                    {
+                        bw.Write(key.Length);
+                        bw.Write(key, 0, key.Length);
+                        bw.Write(IV.Length);
+                        bw.Write(IV, 0, IV.Length);
+                    }
                 }
             }
         }

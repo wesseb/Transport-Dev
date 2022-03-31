@@ -14,32 +14,11 @@ namespace Transport_Dev
 {
     public partial class Form2 : Form
     {
-        private readonly string xmlfile = @"config.xml";
-        private readonly string tokenDat = @"token.dat";
-
         public Form2()
         {
             InitializeComponent();
 
-            if (!File.Exists(tokenDat))
-            {
-                AesEncrypter.GenerateKey();
-            }
-            else if (File.Exists(xmlfile))
-            {
-                //TODO: Załadowanie wartości
-            }
-        }
-
-        private bool enableSwitch (bool enable)
-        {
-            hostBox.Enabled = enable;
-            portBox.Enabled = enable;
-            dbBox.Enabled = enable;
-            loginBox.Enabled = enable;
-            passBox.Enabled = enable;
-
-            return enable;
+            AesEncrypter.GenerateKey();
         }
 
         private void testSQLConnect_Click(object sender, EventArgs e)
@@ -61,8 +40,6 @@ namespace Transport_Dev
             {
                 using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
                 {
-                    enableSwitch(false);
-
                     conn.Open();
 
                     using (NpgsqlCommand cmd = new NpgsqlCommand("SELECT version()", conn))
@@ -80,54 +57,20 @@ namespace Transport_Dev
             }
             catch (Exception ex)
             {
-                enableSwitch(false);
-
                 MessageBox.Show(ex.Message, "Error");
-            }
-            finally
-            {
-                enableSwitch(true);
             }
         }
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            //TODO: Inny system
-
-
-
-            /* try
+            if (savePasswordCheckBox.Checked)
             {
-                if (!File.Exists(xmlfile))
-                {
-                    XDocument xDoc = new XDocument(
-                        new XElement("SQL",
-                            new XElement("Host", hostBox.Text),
-                            new XElement("Port", portBox.Text),
-                            new XElement("DBname", dbBox.Text),
-                            new XElement("User", loginBox.Text),
-                            savePasswordCheckBox.Checked ? new XElement("Password", AesEncrypter.EncryptToAesAndOutput(passBox.Text)) : null
-                        )
-                    );
-
-                    xDoc.Save(xmlfile);
-                }
-                else
-                {
-                    XDocument xDoc = XDocument.Load(xmlfile);
-
-
-                }
+                XMLConfig.saveXMLConfigFile(hostBox.Text, portBox.Text, dbBox.Text, loginBox.Text, passBox.Text);
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message, "Error");
+                XMLConfig.saveXMLConfigFile(hostBox.Text, portBox.Text, dbBox.Text, loginBox.Text);
             }
-            finally
-            {
-                MessageBox.Show("Zmiany zapisane!", "OK!");
-                enableSwitch(true);
-            } */
         }
     }
 }
