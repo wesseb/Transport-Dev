@@ -58,5 +58,41 @@ namespace Transport_Dev
                 MessageBox.Show(ex.Message, "Error!");
             }
         }
+
+        public static (string? hostBox, string? portBox, string? dbBox, string? loginBox, string? passBox) loadXMLConfigData ()
+        {
+            string? host = null, port = null, db = null, login = null, pass = null;
+
+            try
+            {
+
+                if (File.Exists(xmlFileName))
+                {
+                    XDocument xDoc = XDocument.Load(xmlFileName);
+
+                    foreach (XElement e in xDoc.Elements())
+                    {
+                        if (e.Element("Host") == null)
+                        {
+                            throw new NullReferenceException();
+                        }
+                        else
+                        {
+                            host = e.Element("Host")?.Value;
+                            port = e.Element("Port")?.Value;
+                            db = e.Element("DBname")?.Value;
+                            login = e.Element("User")?.Value;
+                            pass = e.Element("Password")?.Value;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!");
+            }
+
+            return (host, port, db, login, pass);
+        }
     }
 }

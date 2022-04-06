@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using Npgsql;
 
 namespace Transport_Dev
@@ -19,6 +18,17 @@ namespace Transport_Dev
             InitializeComponent();
 
             AesEncrypter.GenerateKey();
+            loadConfig();
+        }
+
+        private void loadConfig ()
+        {
+            (string?, string?, string?, string?, string?) values = XMLConfig.loadXMLConfigData();
+            hostBox.Text = values.Item1;
+            portBox.Text = values.Item2;
+            dbBox.Text = values.Item3;
+            loginBox.Text = values.Item4;
+            passBox.Text = values.Item5;
         }
 
         private void testSQLConnect_Click(object sender, EventArgs e)
