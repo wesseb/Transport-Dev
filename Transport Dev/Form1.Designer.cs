@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.SQLCheck = new System.Windows.Forms.ToolStripStatusLabel();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.bazaDanychToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.oAplikacjiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.typBazyDanychToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lokalnaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zdalnaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,6 +40,7 @@
             this.polaczToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rozlaczToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.edytujDanePolaczeniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.oAplikacjiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.informacjeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -57,17 +57,6 @@
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bazaDanychToolStripMenuItem,
-            this.oAplikacjiToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1345, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
@@ -80,6 +69,17 @@
             this.SQLCheck.Size = new System.Drawing.Size(25, 17);
             this.SQLCheck.Text = "Nie";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bazaDanychToolStripMenuItem,
+            this.oAplikacjiToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1345, 24);
+            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
             // bazaDanychToolStripMenuItem
             // 
             this.bazaDanychToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -91,14 +91,6 @@
             this.bazaDanychToolStripMenuItem.Name = "bazaDanychToolStripMenuItem";
             this.bazaDanychToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
             this.bazaDanychToolStripMenuItem.Text = "Baza Danych";
-            // 
-            // oAplikacjiToolStripMenuItem
-            // 
-            this.oAplikacjiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.informacjeToolStripMenuItem});
-            this.oAplikacjiToolStripMenuItem.Name = "oAplikacjiToolStripMenuItem";
-            this.oAplikacjiToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
-            this.oAplikacjiToolStripMenuItem.Text = "O aplikacji";
             // 
             // typBazyDanychToolStripMenuItem
             // 
@@ -113,7 +105,7 @@
             // 
             this.lokalnaToolStripMenuItem.Enabled = false;
             this.lokalnaToolStripMenuItem.Name = "lokalnaToolStripMenuItem";
-            this.lokalnaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.lokalnaToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.lokalnaToolStripMenuItem.Text = "Lokalna";
             // 
             // zdalnaToolStripMenuItem
@@ -121,7 +113,7 @@
             this.zdalnaToolStripMenuItem.Checked = true;
             this.zdalnaToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.zdalnaToolStripMenuItem.Name = "zdalnaToolStripMenuItem";
-            this.zdalnaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zdalnaToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.zdalnaToolStripMenuItem.Text = "Zdalna";
             // 
             // toolStripSeparator1
@@ -149,11 +141,20 @@
             this.edytujDanePolaczeniaToolStripMenuItem.Text = "Edytuj dane polaczenia";
             this.edytujDanePolaczeniaToolStripMenuItem.Click += new System.EventHandler(this.edytujDanePolaczeniaToolStripMenuItem_Click);
             // 
+            // oAplikacjiToolStripMenuItem
+            // 
+            this.oAplikacjiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.informacjeToolStripMenuItem});
+            this.oAplikacjiToolStripMenuItem.Name = "oAplikacjiToolStripMenuItem";
+            this.oAplikacjiToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
+            this.oAplikacjiToolStripMenuItem.Text = "O aplikacji";
+            // 
             // informacjeToolStripMenuItem
             // 
             this.informacjeToolStripMenuItem.Name = "informacjeToolStripMenuItem";
             this.informacjeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.informacjeToolStripMenuItem.Text = "Informacje";
+            this.informacjeToolStripMenuItem.Click += new System.EventHandler(this.informacjeToolStripMenuItem_Click);
             // 
             // Form1
             // 
