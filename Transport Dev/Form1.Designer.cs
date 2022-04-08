@@ -131,6 +131,7 @@
             this.polaczToolStripMenuItem.Name = "polaczToolStripMenuItem";
             this.polaczToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
             this.polaczToolStripMenuItem.Text = "Polacz";
+            this.polaczToolStripMenuItem.Click += new System.EventHandler(this.polaczToolStripMenuItem_Click);
             // 
             // rozlaczToolStripMenuItem
             // 

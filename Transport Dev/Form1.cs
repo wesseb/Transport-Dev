@@ -33,5 +33,10 @@ namespace Transport_Dev
             Form3 form3 = new Form3();
             form3.ShowDialog();
         }
+
+        private void polaczToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
