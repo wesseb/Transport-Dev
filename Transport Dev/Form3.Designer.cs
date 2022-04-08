@@ -80,9 +80,12 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form3";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Informacje";
             this.ResumeLayout(false);
             this.PerformLayout();

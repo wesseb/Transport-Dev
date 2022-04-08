@@ -42,8 +42,13 @@
             this.edytujDanePolaczeniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oAplikacjiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.informacjeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -51,9 +56,9 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.SQLCheck});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 826);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 460);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1345, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(701, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -76,7 +81,7 @@
             this.oAplikacjiToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1345, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(701, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -152,16 +157,47 @@
             // informacjeToolStripMenuItem
             // 
             this.informacjeToolStripMenuItem.Name = "informacjeToolStripMenuItem";
-            this.informacjeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.informacjeToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.informacjeToolStripMenuItem.Text = "Informacje";
             this.informacjeToolStripMenuItem.Click += new System.EventHandler(this.informacjeToolStripMenuItem_Click);
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer1.IsSplitterFixed = true;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 24);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.listView1);
+            this.splitContainer1.Size = new System.Drawing.Size(701, 436);
+            this.splitContainer1.SplitterDistance = 200;
+            this.splitContainer1.SplitterWidth = 2;
+            this.splitContainer1.TabIndex = 2;
+            // 
+            // listView1
+            // 
+            this.listView1.AllowColumnReorder = true;
+            this.listView1.FullRowSelect = true;
+            this.listView1.GridLines = true;
+            this.listView1.Location = new System.Drawing.Point(0, 0);
+            this.listView1.Name = "listView1";
+            this.listView1.Scrollable = false;
+            this.listView1.Size = new System.Drawing.Size(197, 436);
+            this.listView1.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.listView1.TabIndex = 0;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1345, 848);
+            this.ClientSize = new System.Drawing.Size(701, 482);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -171,6 +207,9 @@
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -192,5 +231,7 @@
         private ToolStripMenuItem edytujDanePolaczeniaToolStripMenuItem;
         private ToolStripMenuItem oAplikacjiToolStripMenuItem;
         private ToolStripMenuItem informacjeToolStripMenuItem;
+        private SplitContainer splitContainer1;
+        private ListView listView1;
     }
 }

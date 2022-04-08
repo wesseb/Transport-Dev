@@ -183,9 +183,12 @@
             this.Controls.Add(this.hostBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.testSQLConnect);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form2";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Połączenie bazy danych";
             ((System.ComponentModel.ISupportInitialize)(this.portBox)).EndInit();
             this.ResumeLayout(false);
