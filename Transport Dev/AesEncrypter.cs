@@ -10,7 +10,7 @@ namespace Transport_Dev
         private const string tokenDat = @"token.dat";
 
         /// <summary>
-        /// Funkcja do wygenerowania tokenu IV oraz Key
+        /// Function which is generating a KEY and IV Token
         /// </summary>
         public static void GenerateKey()
         {
@@ -36,12 +36,12 @@ namespace Transport_Dev
         }
 
         /// <summary>
-        /// Hashowanie hasła w formacie AES
+        /// Password Hasher
         /// </summary>
-        /// <param name="text">Hasło</param>
-        /// <returns>Zaszyfrowane hasło</returns>
-        /// <exception cref="ArgumentNullException">Kiedy nie ma hasła</exception>
-        /// <exception cref="FileNotFoundException">Kiedy jest brak pliku token.dat</exception>
+        /// <param name="text">Password</param>
+        /// <returns>Hashed Password</returns>
+        /// <exception cref="ArgumentNullException">No password included</exception>
+        /// <exception cref="FileNotFoundException">No token.dat included</exception>
         public static string EncryptToAesAndOutput(string text)
         {
             byte[] Key;
@@ -82,12 +82,12 @@ namespace Transport_Dev
         }
 
         /// <summary>
-        /// Dehashowania hasła w formacie AES
+        /// Password dehasher
         /// </summary>
-        /// <param name="encryptedText">Zaszyfrowane hasło</param>
-        /// <returns>Hasło w formie plain textu</returns>
-        /// <exception cref="ArgumentNullException">Kiedy nie ma hasła</exception>
-        /// <exception cref="FileNotFoundException">Kiedy jest brak pliku token.dat</exception>
+        /// <param name="encryptedText">Hashed password</param>
+        /// <returns>Decrypted password</returns>
+        /// <exception cref="ArgumentNullException">No hashed password</exception>
+        /// <exception cref="FileNotFoundException">No token.dat included</exception>
         public static string DecryptFromAesAndOutput(string encryptedText)
         {
             byte[] Key;
