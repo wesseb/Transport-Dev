@@ -18,10 +18,10 @@ namespace Transport_Dev
             InitializeComponent();
 
             AesEncrypter.GenerateKey();
-            loadConfig();
+            //loadConfig();
         }
 
-        private void loadConfig ()
+        /*private void loadConfig ()
         {
             (string?, string?, string?, string?, string?) values = XMLConfig.loadXMLConfigData();
             hostBox.Text = values.Item1;
@@ -29,12 +29,12 @@ namespace Transport_Dev
             dbBox.Text = values.Item3;
             loginBox.Text = values.Item4;
             passBox.Text = values.Item5;
-        }
+        }*/
 
         private void testSQLConnect_Click(object sender, EventArgs e)
         {
             string Host = hostBox.Text;
-            string Port = portBox.Text;
+            int Port = Convert.ToInt32(portBox.Text);
             string DBname = dbBox.Text;
             string User = loginBox.Text;
             string Password = passBox.Text;
@@ -75,11 +75,13 @@ namespace Transport_Dev
         {
             if (savePasswordCheckBox.Checked)
             {
-                XMLConfig.saveXMLConfigFile(hostBox.Text, portBox.Text, dbBox.Text, loginBox.Text, passBox.Text);
+                //XMLConfig.saveXMLConfigFile(hostBox.Text, portBox.Text, dbBox.Text, loginBox.Text, passBox.Text);
+                JSONExporter.saveConfigToJSON(hostBox.Text, Convert.ToInt32(portBox.Text), dbBox.Text, loginBox.Text, passBox.Text);
             }
             else
             {
-                XMLConfig.saveXMLConfigFile(hostBox.Text, portBox.Text, dbBox.Text, loginBox.Text);
+                //XMLConfig.saveXMLConfigFile(hostBox.Text, portBox.Text, dbBox.Text, loginBox.Text);
+                JSONExporter.saveConfigToJSON(hostBox.Text, Convert.ToInt32(portBox.Text), dbBox.Text, loginBox.Text);
             }
         }
     }
